@@ -32,10 +32,12 @@ shuffle(cardsWithMatch);
 var deck = $('.deck');
 
 for (i = 0; i < cardsWithMatch.length; i++) {
-  var card = $('<li class="card"></div>');
-  var icon = $('<i class="fa fa-' + cardsWithMatch[i] +'" aria-hidden="true"></i>')
+  var card = $('<li class="card back--visible"></div>');
+  var icon = $('<div class="card__front"><i class="fa fa-' + cardsWithMatch[i] +'" aria-hidden="true"></i></div>')
   deck.append(card);
   card.append(icon);
 }
 
-console.log(cardsWithMatch);
+$('.card').click(function() {
+  $(this).toggleClass('back--visible')
+})
