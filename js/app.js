@@ -1,18 +1,13 @@
 
-// Create cards varible & create match cards to these cards
+// Create cards varible & create match cards to these cards,
+// The name of the icon should match to Font Awsome icon name
 var cards = ["bell", "camera", "car", "bolt", "heart", "star", "rocket", "usd"];
 var cardsWithMatch = [];
 
 for (i = 0; i < cards.length; i++) {
   cardsWithMatch.push(cards[i]);
-  cardsWithMatch.push(cards[i] + "-match");
+  cardsWithMatch.push(cards[i] + " match");
 };
-
-console.log(cards);
-console.log(cardsWithMatch);
-
-
-
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -28,3 +23,19 @@ function shuffle(array) {
 
     return array;
 }
+
+// shuffle all cards
+shuffle(cardsWithMatch);
+
+// Create HTML for cardsWithMatch
+
+var deck = $('.deck');
+
+for (i = 0; i < cardsWithMatch.length; i++) {
+  var card = $('<li class="card"></div>');
+  var icon = $('<i class="fa fa-' + cardsWithMatch[i] +'" aria-hidden="true"></i>')
+  deck.append(card);
+  card.append(icon);
+}
+
+console.log(cardsWithMatch);
