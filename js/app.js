@@ -5,6 +5,7 @@ let cards = ["bell", "camera", "car", "bolt", "heart", "star", "rocket", "usd"];
 let cardsWithMatch = [];
 let moves = 0;
 let openCards = [];
+let lastTwo = [];
 
 for (i = 0; i < cards.length; i++) {
   cardsWithMatch.push(cards[i]);
@@ -50,6 +51,7 @@ for (var i = 0; i < cardsCreated.length; i++) {
 }
 
 function clickFunction(e) {
+  
   if (openCards.length % 2 == 0 && openCards.length !== 0) {
     if (compareCards(e) === true) {
 
@@ -93,7 +95,7 @@ function addListener(e) {
 }
 
 function compareCards(e) {
-  var lastTwo = openCards.splice(-2, 2);
+  lastTwo = openCards.splice(-2, 2);
   console.log("latTwo var:" + lastTwo)
   if (lastTwo[0] === lastTwo[1]) {
     return true;
