@@ -3,7 +3,7 @@
 // The name of the icon should match to Font Awsome icon name
 let cards = ["bell", "camera", "car", "bolt", "heart", "star", "rocket", "usd"];
 let cardsWithMatch = [];
-let moves = 0;
+var moves = 0;
 let openCards = [];
 let lastTwo = [];
 
@@ -29,14 +29,13 @@ function shuffle(array) {
 
 // shuffle all cards
 shuffle(cardsWithMatch);
-console.log(cardsWithMatch);
 
 // Create HTML for cardsWithMatch
 
 var deck = $('.deck');
 
 for (i = 0; i < cardsWithMatch.length; i++) {
-  var card = $('<li class="card ' + cardsWithMatch[i] + '"></div>');
+  var card = $('<li class="card ' + cardsWithMatch[i] + '" ></div>');
   var icon = $('<i class="fa fa-' + cardsWithMatch[i] + '" aria-hidden="true"></i>')
   deck.append(card);
   card.append(icon);
@@ -46,57 +45,59 @@ for (i = 0; i < cardsWithMatch.length; i++) {
 
 let cardsCreated = document.getElementsByTagName('li');
 
-for (var i = 0; i < cardsCreated.length; i++) {
-    cardsCreated[i].addEventListener('click', clickFunction, false);
-}
 
-function clickFunction(e) {
-  
+$( ".deck" ).on( "click", "li", onClick);
+
+function onClick(e) {
+  countMoves();
+  pushToOpen(e);
+  console.log(openCards);
+
+
   if (openCards.length % 2 == 0 && openCards.length !== 0) {
-    if (compareCards(e) === true) {
+    if (compareCards(e) !== true) {
 
-      addMatchClass();
-      removeOpenClass();
+      removeFromOpen();
+      setTimeout(function() {addNotMatchClass();}, 200);
+      setTimeout(function() {removeOpenClass();}, 1000);
 
     } else {
-      removeFromOpen();
+      addMatchClass();
       removeOpenClass();
-      addListener(e);
+      removeListener(e);
+
     }
 
   } else {
-    pushToOpen(e);
+
   }
+
+  console.log(moves)
 }
 
 function pushToOpen(e) {
   openCards.push(e.target.className);
   e.target.className += " open";
-  console.log(openCards);
 }
 
 function removeFromOpen() {
   openCards.splice(-2, 2);
 }
 
+
 function removeOpenClass() {
   var d = $('.open');
   d.removeClass('open');
+  d.removeClass('not-match');
 }
 
 function removeListener(e) {
-  var d = $('.open');
-  d.removeEventListener("click", clickFunction, false);
+  $( ".deck" ).off( "click", ".match", onClick);
 }
 
-function addListener(e) {
-  var d = document.getElementById(e.target.id);
-  d.addEventListener ("click", clickFunction, false);
-}
 
 function compareCards(e) {
   lastTwo = openCards.splice(-2, 2);
-  console.log("latTwo var:" + lastTwo)
   if (lastTwo[0] === lastTwo[1]) {
     return true;
   }
@@ -108,48 +109,16 @@ function addMatchClass() {
   d.addClass('match');
 }
 
+function addNotMatchClass() {
+  var d = $('.open');
+  d.addClass('not-match');
+}
 
 
-
-
-//function pushToOpen(e){
-
-//    if (openCards.length <= 0) {
-//      openCards.push(e.target.id);
-
-      /// find card and add class to show it
-//      var d = document.getElementById(e.target.id);
-//      d.className += " open";
-
-//    } else if (openCards.length = 1)  {
-
-//        openCards.push(e.target.id);
-//        var d = document.getElementById(e.target.id);
-//        d.className += " open";
-
-//        if (checkOpenCards() === true) {
-//          console.log('MATCH!!! ')
-
-//        } else {
-//           openCards = [];
-           /// remove open class
-//           var findOpen = document.getElementsByClassName('open');
-//           for (i = 0; i < findOpen.length; i++ ) {
-//             findOpen[i].classList.remove("open");
-//           }
-//        }
-        /// find card and add class to show it
-
-
-//    } else {
-//      openCards = [];
-//    }
-
-
-//    console.log(openCards);
-// }
-
-
+function countMoves() {
+    moves += 1;
+    document.getElementById("clicks").innerHTML = moves;
+};
 
 
 
