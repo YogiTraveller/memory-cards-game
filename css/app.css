@@ -1,7 +1,26 @@
 body {
-  font-family: 'Scope One', serif;
+  font-family: 'Open Sans', sans-serif;
   text-align: center;
-  background: #7EDCCC;
+  background: #FFF;
+  color: #212121;
+  font-size: 14px;
+  padding: 0;
+  margin: 0;
+}
+
+h1 {
+  font-size: 30px;
+  font-weight: 300;
+}
+
+h2 {
+  font-size: 30px;
+}
+
+header {
+  padding: 25px;
+  background: #1c262f;
+  color: #FFF;
 }
 
 .deck {
@@ -11,11 +30,8 @@ body {
   justify-content: space-between;
   align-items: center;
   max-width: 660px;
-  padding: 50px;
+  padding: 25px 50px;
   margin: 0 auto;
-  /* border: 5px solid rgba(0, 0, 0, 0.2); */
-  border-radius: 10px;
-  background: #7EDCCC;
 }
 
 .card {
@@ -25,14 +41,12 @@ body {
   margin-bottom: 15px;
   border-radius: 5px;
   color: #FFF;
-  background: #414141;
+  background: #424242;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  -webkit-box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
-     -moz-box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
-          box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+          box-shadow: 5px 5px 25px 0px rgba(46, 61, 73, 0.2);
    -webkit-transform: rotateY(180deg) scale(1);
       -moz-transform: rotateY(180deg) scale(1);
         -o-transform: rotateY(180deg) scale(1);
@@ -56,7 +70,8 @@ body {
 
 
   .open.card{
-    background: #398afb;
+    background: #1E88E5;
+    color: #FFF;
     -webkit-transition: all 0.4s ease;
        -moz-transition: all 0.4s ease;
          -o-transition: all 0.4s ease;
@@ -68,9 +83,10 @@ body {
             transform: rotateY(0deg) scale(1);}
 
   .match.card {
-      background: #E3C219;
+      color: #FFF;
+      background: #FBC02D;
       animation-duration: 0.5s;
-      animation-fill-mode: both;
+      animation-fill-mode: backwards;
       animation-timing-function: ease-in-out;
       animation-name: tada;
 
@@ -82,9 +98,10 @@ body {
   }
 
   .not-match.card {
-      background: red;
-      animation-duration: 0.5s;
-      animation-fill-mode: both;
+      color: #FFF;
+      background: #e53935;
+      animation-duration: 0.4s;
+      animation-fill-mode: backwards;
       animation-timing-function: ease-in-out;
       animation-name: wobble;
   }
@@ -121,4 +138,178 @@ body {
 .open i,
 .match i {
     font-size: 36px
+}
+
+
+.score-panel {
+  max-width: 660px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+button:focus {
+  outline:0;}
+
+.reset {
+  cursor: pointer;
+  border: 0;
+  background: 0;
+  padding: 0;
+  margin: 0;
+  font-size: 14px;
+  opacity: 0.4;
+  position: absolute;
+  right: 0;
+  -webkit-transition: all 0.1s ease;
+     -moz-transition: all 0.1s ease;
+       -o-transition: all 0.1s ease;
+          transition: all 0.1s ease;}
+  .reset:hover {
+    opacity: 1
+  }
+
+  .stars {
+    margin-right: 10px;
+    color: #FBC02D
+  }
+
+.winner-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #FFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+}
+
+.winner-panel.open {
+  visibility: visible;
+}
+
+.winner-panel__content {
+  opacity: 1;
+  -webkit-transform: scale(1.1);
+     -moz-transform: scale(1.1);
+       -o-transform: scale(1.1);
+      -ms-transform: scale(1.1);
+          transform: scale(1.1);
+ -webkit-transition: transform 0s ease;
+    -moz-transition: transform 0s ease;
+      -o-transition: transform 0s ease;
+         transition: transform 0s ease;}
+         .open .winner-panel__content {
+           opacity: 1;
+           -webkit-transform: scale(1);
+              -moz-transform: scale(1);
+                -o-transform: scale(1);
+               -ms-transform: scale(1);
+                   transform: scale(1);
+                   -webkit-transition: transform 0.2s ease;
+                      -moz-transition: transform 0.2s ease;
+                        -o-transition: transform 0.2s ease;
+                           transition: transform 0.2s ease;}
+
+.start {
+  border: 0;
+  background: #1E88E5;
+  color: #FFF;
+  padding: 1.2em 4em;
+  border-radius: 5px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 12px;
+  margin-top: 2em;
+  cursor: pointer;
+
+  -webkit-transition: background 0.2s ease;
+     -moz-transition: background 0.2s ease;
+       -o-transition: background 0.2s ease;
+          transition: background 0.2s ease;}
+          .start:hover {
+            background: #1565C0
+          }
+
+
+.game-panel {
+
+}
+
+.checkmark {
+  width: 200px;
+  margin: 0 auto;
+  padding-top: 40px;
+}
+
+.open .path {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 0;
+  animation: dash 2s ease-in-out;
+  -webkit-animation: dash 2s ease-in-out;
+}
+
+.open .spin {
+  animation: spin 2s;
+  -webkit-animation: spin 2s;
+  transform-origin: 50% 50%;
+  -webkit-transform-origin: 50% 50%;
+}
+
+@-webkit-keyframes dash {
+ 0% {
+   stroke-dashoffset: 1000;
+ }
+ 100% {
+   stroke-dashoffset: 0;
+ }
+}
+
+@keyframes dash {
+ 0% {
+   stroke-dashoffset: 1000;
+ }
+ 100% {
+   stroke-dashoffset: 0;
+ }
+}
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes text {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1;
+  }
+
+
+  @keyframes text {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1;
+  }
 }

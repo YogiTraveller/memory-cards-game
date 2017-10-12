@@ -5,24 +5,51 @@
     <title>Matching Game</title>
     <meta name="description" content="">
     <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
-    <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Coda">
-    <link href="https://fonts.googleapis.com/css?family=Scope+One" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
     <link rel="stylesheet" href="css/app.css">
 </head>
 <body>
 
 <main>
+  <div id="game-panel" class="game-panel">
     <h1>Matching cards game</h1>
 
     <section class="score-panel">
+        <div class="stars">
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <i class="fa fa-star" aria-hidden="true"></i>
+        </div>
         <p><span id="clicks">0</span> moves</p>
+        <button id="reset" class="reset"><i class="fa fa-repeat" aria-hidden="true"></i></button>
+
     </section>
 
-    <div class="">
-        <ul class="deck">
+    <ul id="deck" class="deck">
 
-        </ul>
+    </ul>
+  </div>
+
+  <div id="winner-panel" class="winner-panel">
+    <div class="checkmark">
+        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+         viewBox="0 0 161.2 161.2" enable-background="new 0 0 161.2 161.2" xml:space="preserve">
+            <path class="path" fill="none" stroke="#FBC02D" stroke-miterlimit="10" d="M425.9,52.1L425.9,52.1c-2.2-2.6-6-2.6-8.3-0.1l-42.7,46.2l-14.3-16.4
+              c-2.3-2.7-6.2-2.7-8.6-0.1c-1.9,2.1-2,5.6-0.1,7.7l17.6,20.3c0.2,0.3,0.4,0.6,0.6,0.9c1.8,2,4.4,2.5,6.6,1.4c0.7-0.3,1.4-0.8,2-1.5
+              c0.3-0.3,0.5-0.6,0.7-0.9l46.3-50.1C427.7,57.5,427.7,54.2,425.9,52.1z"/>
+            <circle class="path" fill="none" stroke="#FBC02D" stroke-width="4" stroke-miterlimit="10" cx="80.6" cy="80.6" r="62.1"/>
+            <polyline class="path" fill="none" stroke="#FBC02D" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" points="113,52.8
+              74.1,108.4 48.2,86.4 "/>
+
+            <circle class="spin" fill="none" stroke="#1E88E5" stroke-width="4" stroke-miterlimit="10" stroke-dasharray="12.2175,12.2175" cx="80.6" cy="80.6" r="73.9"/>
+      </svg>
     </div>
+    <div class="winner-panel__content">
+      <h2>Congratulations! You won!</h2>
+      <p>With <span id="clicks-final">0</span> moves and <span id="stars-final">0</span> stars</p>
+      <button id="start" class="start" onclick="resetGame()">Play again!</button>
+    </did>
+  </div>
 
 
 </main>
