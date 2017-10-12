@@ -30,12 +30,12 @@ header {
   justify-content: space-between;
   align-items: center;
   max-width: 660px;
-  padding: 25px 50px;
+  padding: 25px;
   margin: 0 auto;
 }
 
 .card {
-  width: 150px;
+  width: 22%;
   height: 150px;
   position: relative;
   margin-bottom: 15px;
@@ -144,6 +144,7 @@ header {
 .score-panel {
   max-width: 660px;
   margin: 0 auto;
+  padding: 0 25px;
   display: flex;
   align-items: center;
   position: relative;

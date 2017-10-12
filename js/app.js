@@ -171,7 +171,7 @@ function starRating(){
   } else {
 
   }
-  let finalStarRating = document.getElementsByClassName('fa-star');
+  let finalStarRating = document.getElementsByClassName('full-star-rating');
   document.getElementById("stars-final").innerHTML = finalStarRating.length;
 }
 
