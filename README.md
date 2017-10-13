@@ -10,14 +10,14 @@ Do it as quickly as possible. Timer is added, so it will be more easy to know ho
 
 
 ## Star ratings
-1 - 19 moves = 3 stars
-20 - 29 = 2 stars
-30 - 39 = 1 star
-40 or more = 0 stars
+- 1 - 19 moves = 3 stars
+- 20 - 29 = 2 stars
+- 30 - 39 = 1 star
+- 40 or more = 0 stars
 
 
 ## Resources
 
-1. [Official Udacity the Memory Game project repository on GitHub](the Memory Game project repository on GitHub)
+1. [Official Udacity the Memory Game project repository on GitHub](https://github.com/udacity/fend-project-memory-game)
 2. [Shuffle function](http://stackoverflow.com/a/2450976)
 3. [Timer plugin](https://github.com/walmik/timer.jquery)
