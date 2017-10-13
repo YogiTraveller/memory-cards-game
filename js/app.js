@@ -54,46 +54,50 @@ function initGame() {
   $("#timer").timer();
 }
 
+
+// comparing cards function
+
+var compareCards = function () {
+  var $this = $(this);
+  var card = $this.html();
+  openCards.push(card)
+  $this.addClass('open');
+  starRating();
+  $this.off('click');
+  /// check if two cards are open if yes compare and then do smthg
+  if (openCards.length > 1) {
+    // function to compare cards and do some action when they match and they dont
+
+      if (openCards[0] === openCards[1]) {
+        deck.find('.open').addClass('match');
+        setTimeout(function () { deck.find('.open').removeClass('open'); }, 500);
+        openCards = [];
+        matches++;
+        moves++;
+        countMoves();
+
+      } else {
+        $('.open').on('click', compareCards)
+        openCards = [];
+        setTimeout(function () { deck.find('.open').addClass('not-match'); }, 200);
+        setTimeout(function () { deck.find('.open').removeClass('not-match'); }, 500);
+        setTimeout(function () { deck.find('.open').removeClass('open'); }, 701);
+        moves++;
+        countMoves();
+      }
+   }
+  /// what happens if all cards match
+  if (matches === cardsWithMatchQTY / 2 ) {
+      youAreTheWinner();
+  }
+}
+
 // what happens when user clicks on card
 var addCardListener = function() {
-  deck.find('.card:not(.match, .open)').on('click' , function() {
-    var $this = $(this);
-    var card = $this.html();
-    openCards.push(card)
-    $this.addClass('open');
-    starRating();
-    /// check if two cards are open if yes compare and then do smthg
-    if (openCards.length > 1) {
-      // function to compare cards and do some action when they match and they dont
-
-        if (openCards[0] === openCards[1]) {
-          console.log(true);
-          deck.find('.open').addClass('match');
-          setTimeout(function () { deck.find('.open').removeClass('open'); }, 500);
-          deck.find('.match').off('click');
-          openCards = [];
-          matches++;
-          moves++;
-          countMoves();
-
-        } else {
-          console.log(false);
-          openCards = [];
-          setTimeout(function () { deck.find('.open').addClass('not-match'); }, 200);
-          setTimeout(function () { deck.find('.open').removeClass('not-match'); }, 500);
-          setTimeout(function () { deck.find('.open').removeClass('open'); }, 701);
-          moves++;
-          countMoves();
-
-        }
-     }
-
-    /// what happens if all cards match
-    if (matches === cardsWithMatchQTY / 2 ) {
-        youAreTheWinner();
-    }
-  });
+  deck.find('.card').one('click' , compareCards);
 };
+
+
 
 function youAreTheWinner() {
   var winnerPanel = $('#winner-panel');
