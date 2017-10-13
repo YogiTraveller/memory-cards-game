@@ -4,18 +4,21 @@
 //
 let cards = ["bell", "camera", "car", "bolt", "heart", "star", "rocket", "usd"];
 let cardsWithMatch = [];
-var moves = 0;
-let openCards = [];
-let matches = 0;
-let cardsWithMatchQTY = cards.length;
-let deck = $('.deck');
-
 
 // generate cardsWithMatch array
 for (i = 0; i < cards.length; i++) {
   cardsWithMatch.push(cards[i]);
   cardsWithMatch.push(cards[i]);
 };
+
+var moves = 0;
+let openCards = [];
+let matches = 0;
+let cardsWithMatchQTY = cardsWithMatch.length;
+let deck = $('.deck');
+
+
+
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -48,6 +51,7 @@ function initGame() {
   shuffle(cardsWithMatch);
   generateCards();
   addCardListener();
+  $("#timer").timer();
 }
 
 // what happens when user clicks on card
@@ -57,7 +61,7 @@ var addCardListener = function() {
     var card = $this.html();
     openCards.push(card)
     $this.addClass('open');
-    moves++;
+    starRating();
     /// check if two cards are open if yes compare and then do smthg
     if (openCards.length > 1) {
       // function to compare cards and do some action when they match and they dont
@@ -66,33 +70,87 @@ var addCardListener = function() {
           console.log(true);
           deck.find('.open').addClass('match');
           setTimeout(function () { deck.find('.open').removeClass('open'); }, 500);
-
+          deck.find('.match').off('click');
           openCards = [];
           matches++;
+          moves++;
+          countMoves();
+
         } else {
           console.log(false);
           openCards = [];
-          setTimeout(function () { deck.find('.open').removeClass('open'); }, 500);
+          setTimeout(function () { deck.find('.open').addClass('not-match'); }, 200);
+          setTimeout(function () { deck.find('.open').removeClass('not-match'); }, 500);
+          setTimeout(function () { deck.find('.open').removeClass('open'); }, 701);
+          moves++;
+          countMoves();
 
         }
      }
 
     /// what happens if all cards match
-    if (matches === cardsWithMatchQTY) {
+    if (matches === cardsWithMatchQTY / 2 ) {
         youAreTheWinner();
     }
   });
 };
 
 function youAreTheWinner() {
-  var winnerPanel = document.getElementById('winner-panel');
-  setTimeout(function() {winnerPanel.className += " open";}, 605);
+  var winnerPanel = $('#winner-panel');
+  setTimeout(function() {winnerPanel.addClass('open')}, 605);
+  var finalTime = $('#timer').html();
+  $('#final-time').html(finalTime);
+  $("#timer").timer('pause');
+  starRating()
+
 }
 
 function countMoves() {
-    moves = moves / 2 ;
-    $('#clicks').innerHTML = moves;
-    $("#clicks-final").innerHTML = moves;
+    console.log("tyle ruchow" + moves);
+    $('#clicks').text(moves);
+    $("#clicks-final").text(moves);
 };
-$("#timer").timer();
+
+// function for star ratings based on moves
+function starRating(){
+  if (moves === 20) {
+    $('.stars i:nth-child(3)').addClass('fa-star-o').removeClass('fa-star')
+  } else if (moves === 30) {
+    $('.stars i:nth-child(2)').addClass('fa-star-o').removeClass('fa-star')
+  } else if (moves === 40) {
+    $('.stars i:nth-child(1)').addClass('fa-star-o').removeClass('fa-star')
+  }
+  let finalStarRating = $('.stars .fa-star').length;
+  $("#stars-final").html(finalStarRating);
+}
+
+// function to display star rating on Congratulations screen
+function resetStarRating() {
+  let stars = 3;
+  let starsNotFull = $('.fa-star-o');
+
+  $('.stars i').addClass('fa-star').removeClass('fa-star-o');
+}
+
+// all what is needed to reset game
+let resetButton = $('#reset');
+resetButton.on('click', resetGame);
+
+
+function resetGame() {
+  moves = 0;
+  matches = 0;
+  openCards = [];
+  $('#clicks').html(moves);
+  deck.empty();
+  resetStarRating();
+  initGame();
+  $("#timer").timer('remove');
+  $("#timer").timer();
+  var winnerPanel = $('#winner-panel');
+  winnerPanel.removeClass('open')
+
+}
+
+
 initGame();
