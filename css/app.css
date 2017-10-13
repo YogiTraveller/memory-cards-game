@@ -6,6 +6,7 @@ body {
   font-size: 14px;
   padding: 0;
   margin: 0;
+  background-image: linear-gradient(120deg, #89f7fe 0%, #66a6ff 100%);
 }
 
 h1 {
@@ -30,8 +31,10 @@ header {
   justify-content: space-between;
   align-items: center;
   max-width: 660px;
-  padding: 25px;
+  padding: 40px;
   margin: 0 auto;
+  border-radius: 15px;
+
 }
 
 .card {
